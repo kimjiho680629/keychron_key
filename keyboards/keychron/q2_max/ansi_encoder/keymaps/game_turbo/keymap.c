@@ -78,3 +78,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_scan_user(void) {
     matrix_scan_game_turbo();
 }
+
+bool rgb_matrix_indicators_user(void) {
+    return rgb_matrix_indicators_game_turbo();
+}

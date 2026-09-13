@@ -25,29 +25,56 @@ void stop_game_turbo(void) {
     set_game_turbo_led_color(0);
 }
 
+bool rgb_matrix_indicators_game_turbo(void) {
+#if defined(RGB_MATRIX_ENABLE)
+    if (active_game != 0) {
+        switch (active_game) {
+            case 1: // GAME 1 (345): 주황색 (Orange: 255, 120, 0)
+                rgb_matrix_set_color_all(255, 120, 0);
+                break;
+            case 2: // GAME 2 (2345): 브라운 (Brown / Warm Amber: 140, 50, 0)
+                rgb_matrix_set_color_all(140, 50, 0);
+                break;
+            case 3: // GAME 3 (12345): 하늘색 (Cyan: 0, 220, 255)
+                rgb_matrix_set_color_all(0, 220, 255);
+                break;
+            case 4: // GAME 4 (45): 빨간색 (Red: 255, 0, 0)
+                rgb_matrix_set_color_all(255, 0, 0);
+                break;
+            case 5: // GAME 5 (L_MOUSE): 자홍색/마젠타 (Magenta: 255, 0, 200)
+                rgb_matrix_set_color_all(255, 0, 200);
+                break;
+        }
+        return false; // Keychron 기본 인디케이터 루틴 및 이펙트 덮어쓰기 방지
+    }
+#endif
+    return true;
+}
+
 void set_game_turbo_led_color(uint8_t game) {
 #if defined(RGB_MATRIX_ENABLE)
     if (game == 0) {
         /* 키 중지 시: 모든 LED 소등(OFF) */
+        rgb_matrix_set_color_all(0, 0, 0);
         rgb_matrix_disable_noeeprom();
     } else {
+        /* 키 시작 시: 즉시 활성화 및 1회 색상 주입 */
         rgb_matrix_enable_noeeprom();
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
         switch (game) {
-            case 1: // GAME 1 (345): 주황색 (Orange: H28, S255, V255)
-                rgb_matrix_sethsv_noeeprom(28, 255, 255);
+            case 1: // 주황색
+                rgb_matrix_set_color_all(255, 120, 0);
                 break;
-            case 2: // GAME 2 (2345): 브라운색 (Brown: H28, S255, V128)
-                rgb_matrix_sethsv_noeeprom(28, 255, 128);
+            case 2: // 브라운
+                rgb_matrix_set_color_all(140, 50, 0);
                 break;
-            case 3: // GAME 3 (12345): 하늘색 (Cyan: H128, S255, V255)
-                rgb_matrix_sethsv_noeeprom(128, 255, 255);
+            case 3: // 하늘색
+                rgb_matrix_set_color_all(0, 220, 255);
                 break;
-            case 4: // GAME 4 (45): 빨간색 (Red: H0, S255, V255)
-                rgb_matrix_sethsv_noeeprom(0, 255, 255);
+            case 4: // 빨간색
+                rgb_matrix_set_color_all(255, 0, 0);
                 break;
-            case 5: // GAME 5 (L_MOUSE): 자홍색/마젠타 (Magenta: H213, S255, V255)
-                rgb_matrix_sethsv_noeeprom(213, 255, 255);
+            case 5: // 자홍색
+                rgb_matrix_set_color_all(255, 0, 200);
                 break;
         }
     }

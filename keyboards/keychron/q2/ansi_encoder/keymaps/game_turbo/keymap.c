@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Layer 4: FN3 레이어 (F1~F12, W=Game 1(GM 345), E=Game 5(GM MOUSE), 매크로0, 매크로1 탑재) */
     [_FN3] = LAYOUT_ansi_67(
         QK_BOOT,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   _______,  _______,
-        RM_TOGG,  QK_KB_11, QK_KB_15, RM_HUEU,  RM_SATU,  RM_SPDU,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+        RM_TOGG,  RM_NEXT,  QK_KB_11, QK_KB_15, RM_SATU,  RM_SPDU,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
         KC_CAPS,  RM_PREV,  RM_VALD,  RM_HUED,  RM_SATD,  RM_SPDD,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  _______,
         _______,            _______,  _______,  QK_MACRO_0, QK_MACRO_1, _______, _______, _______, _______, _______, _______,         _______,  _______,
         _______,  _______,  _______,                              _______,                            _______,  _______,  _______,  _______,  _______,  _______
@@ -88,4 +88,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void matrix_scan_user(void) {
     matrix_scan_game_turbo();
+}
+
+bool rgb_matrix_indicators_user(void) {
+    return rgb_matrix_indicators_game_turbo();
 }

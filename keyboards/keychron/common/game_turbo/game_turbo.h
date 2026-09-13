@@ -58,3 +58,4 @@ void matrix_scan_game_turbo(void);
 uint8_t get_active_game_turbo(void);
 void stop_game_turbo(void);
 void set_game_turbo_led_color(uint8_t game);
+bool rgb_matrix_indicators_game_turbo(void);
