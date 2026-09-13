@@ -1,0 +1,17 @@
+# 공식 QMK 거대 소스트리 제외 (필요 시 build_fw.sh로 관리)
+qmk_firmware/
+
+# 빌드 및 캐시 파일
+*.o
+*.obj
+*.d
+*.elf
+*.hex
+*.map
+.build/
+
+# 임시 및 시스템 파일
+*~
+*.swp
+.DS_Store
+__pycache__/
