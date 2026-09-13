@@ -35,15 +35,18 @@
   - `q2_max/ansi_encoder/keymaps/game_turbo`
   - `q2_he/ansi_encoder/keymaps/game_turbo`
 
-## 4. VIA 웹앱 및 키맵 백업 JSON 사양
+## 4. VIA 웹앱 및 직설적 키보드 정의 JSON 사양
 - **VIA 키보드 정의(Definition) JSON**:
-  - 파일 위치: `/home/kjh/Downloads/keychron_q2_game_turbo_via.json`, `/home/kjh/Projects/Gemini_Job/Keychron/keychron_q2_game_turbo_via.json`, `qmk_firmware/keyboards/keychron/q2/via_json/q2_ansi_encoder.json`
-  - Keychron 순정 단축키 11종(0~10번)을 그대로 유지하고, 인덱스 11~15번에 Game 1~5(`GM 345`, `GM 2345`, `GM 12345`, `GM 45`, `GM MOUSE`)를 등록하여 인덱스 충돌 방지 및 VIA `CUSTOM` 탭/키캡 라벨 완벽 렌더링 지원.
-  - 최신 VIA v3 스펙에 맞춰 `"keycodes": ["qmk_rgb_matrix"]`로 모듈을 명시 지정하여 `qmk_lighting` 호환성 경고 문구 완전 제거.
-- **키맵 백업 JSON**:
-  - 파일 위치: `/home/kjh/Downloads/Keymap-Keychron Q2 ANSI Knob-GameTurbo.json`, `/home/kjh/Downloads/Keymap-Keychron Q2 ANSI Knob-13-16-41.json`
-  - 5번째 레이어(Layer 4 / Fn2 레이어)의 W=`32267` (`QK_KB_11`), E=`32271` (`QK_KB_15`)로 영구 지정.
-  - 적용 방법: VIA 상단 `CONFIGURE` ➔ 좌측 사이드바 `SAVE + LOAD` ➔ `Load Saved Keymap`에서 업로드하여 복원.
+  - 파일 위치:
+    - `/home/kjh/Downloads/VIA_디자인탭_Keychron_Q2_정의.json` (직설적 한글 파일명)
+    - `/home/kjh/Projects/Gemini_Job/Keychron/VIA_디자인탭_Keychron_Q2_정의.json`
+    - `/home/kjh/Projects/Gemini_Job/Keychron/keychron_q2_via_definition.json`
+    - `qmk_firmware/keyboards/keychron/q2/via_json/q2_ansi_encoder.json`
+  - **CUSTOM(사용자 지정) 탭 전면 최적화**: Keychron 순정 단축키 대신 **Game 1~5(`GM 345`, `GM 2345`, `GM 12345`, `GM 45`, `GM MOUSE`)를 0~4번 인덱스에 단독 배치**하여, 사용자 지정 탭을 열었을 때 첫 줄에 5대 핵심 게임키가 큼직하게 렌더링되도록 구현.
+  - **무경고(Zero Warning) 초경량 구조**: 경고를 유발하는 구형 조명 메뉴를 제거하고 `"keycodes": ["qmk_rgb_matrix_keycodes"]`로 표준화하여 디자인 탭 업로드 시 어떠한 에러나 노란 경고도 없이 100% 정상 로드.
+- **키맵 기본 내장**:
+  - 펌웨어 기본 키맵(Layer 4 / Fn2 레이어)의 W=`QK_KB_0`(`GM 345`), E=`QK_KB_4`(`GM MOUSE`)로 기본 하드코딩되어 있어, 별도의 키맵 백업 JSON 복원 작업 없이 정의 파일 로드만으로 즉시 사용 가능.
+  - 구버전 키맵 백업 파일들은 다운로드 폴더 내 `keymap_backup/` 폴더로 격리 보관.
 
 ## 5. 주요 명령어 및 스크립트
 - **환경 구축 및 의존성 설치**:
