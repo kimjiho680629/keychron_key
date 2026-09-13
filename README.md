@@ -15,7 +15,10 @@ Keychron(키크론) 기계식 키보드를 위한 고성능 QMK 커스텀 펌웨
 - **초경량 노-워닝(Zero Warning) VIA v3 정의 파일 탑재**:
   - 사용자 지정(`CUSTOM`) 탭 클릭 시 불필요한 맥 단축키 없이 **Game 1~5 연타키 5종이 첫 줄에 큼직하게 단독 렌더링**됩니다.
   - 경고를 유발하는 구형 조명 메뉴를 제거하고 `"qmk_rgb_matrix_keycodes"` 표준을 적용하여 **디자인 탭에서 단 1개의 경고/에러도 없이 깔끔하게 로드**됩니다.
-- **Keychron 순정 기능 100% 보존**: 볼륨 노브, 한영키(`KC_HAEN`), Mac/Windows 하드웨어 토글 스위치가 순정 그대로 정상 작동합니다.
+- **Keychron 순정 기능 100% 보존**: 로터리 인코더(Knob 볼륨 업/다운/음소거), 한영키(`KC_HAEN`), Mac/Windows 하드웨어 토글 스위치가 순정 그대로 정상 작동합니다.
+- **로터리 인코더(Knob) 하드웨어 드라이버 및 EEPROM 자동 동기화**:
+  - `ENCODER_ENABLE = yes` 및 Quadrature 인터럽트 드라이버를 탑재하여 노브 회전 및 클릭 반응성을 극대화했습니다.
+  - 새 펌웨어 플래싱 후 이전 EEPROM 캐시로 인해 노브 동작이 안 될 경우, `./fix_encoder_eeprom.py`를 통해 모든 레이어의 볼륨/RGB 매핑을 1초 만에 원클릭으로 완벽 복구할 수 있습니다.
 
 ---
 
@@ -46,10 +49,11 @@ Keychron(키크론) 기계식 키보드를 위한 고성능 QMK 커스텀 펌웨
 │   ├── q2/ansi_encoder/keymaps/game_turbo/ # Keychron Q2 Knob 전용 키맵 (Layer 4 W=GM 345, E=GM MOUSE 기본 탑재)
 │   ├── q2_max/ansi_encoder/keymaps/game_turbo/ # Q2 Max 무선 전용 키맵
 │   └── q2_he/ansi_encoder/keymaps/game_turbo/  # Q2 HE 자석축 전용 키맵
-├── VIA_디자인탭_Keychron_Q2_정의.json       # 직설적 파일명의 초경량 무경고 VIA 정의 JSON
+├── VIA_디자인탭_Keychron_Q2_정의.json       # 직설적 파일명의 초경량 무경고 VIA 정의 JSON (Knob e0 탑재)
 ├── keychron_q2_via_definition.json         # 영문 호환 정의 JSON
 ├── keychron_q2_game_turbo_via.json         # 기존 빌드 스크립트 호환 정의 JSON
-├── keychron_q2_ansi_encoder_game_turbo.bin # 즉시 플래싱 가능한 최신 펌웨어 바이너리
+├── keychron_q2_ansi_encoder_game_turbo.bin # 로터리 인코더 지원 최신 펌웨어 바이너리
+├── fix_encoder_eeprom.py                   # 로터리 인코더(Knob) EEPROM 자동 복구/동기화 헬퍼
 ├── build_fw.sh                             # DFU 자동 감지 플래싱 & 컴파일 헬퍼
 ├── enter_bootloader.py                     # 소프트웨어 부트로더 점프 파이썬 유틸
 ├── setup_env.sh                            # 툴체인 및 udev 권한 원클릭 셋업

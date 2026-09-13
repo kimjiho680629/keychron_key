@@ -47,6 +47,17 @@ case "${cmd}" in
         km="${3:-via}"
         echo "컴파일 진행: Keyboard=${kb}, Keymap=${km}"
         qmk compile -kb "${kb}" -km "${km}"
+
+        bin_name=$(echo "${kb}_${km}" | tr '/' '_')
+        bin_path="${QMK_DIR}/${bin_name}.bin"
+        if [ ! -f "${bin_path}" ]; then
+            bin_path=$(find "${QMK_DIR}" -maxdepth 1 -name "*${km}*.bin" -type f | head -n 1)
+        fi
+        if [ -f "${bin_path}" ]; then
+            cp -f "${bin_path}" "${HOME}/Downloads/$(basename "${bin_path}")" 2>/dev/null || true
+            cp -f "${bin_path}" "${SCRIPT_DIR}/$(basename "${bin_path}")" 2>/dev/null || true
+            echo "최신 바이너리가 프로젝트 루트 및 Downloads 폴더에 복사되었습니다."
+        fi
         ;;
 
     flash)
